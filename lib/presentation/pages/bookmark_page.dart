@@ -18,7 +18,7 @@ class BookmarkPage extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      'Bookmark',
+                      'Your Bookmark',
                       style: titleText.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.bold

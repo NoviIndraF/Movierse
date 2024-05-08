@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movierse/core/styles/colors.dart';
+import 'package:movierse/presentation/pages/detail_page.dart';
 import 'package:movierse/presentation/pages/home_page.dart';
 import 'package:movierse/presentation/pages/main_page.dart';
 
@@ -33,6 +34,8 @@ class _AppState extends State<App> {
         switch (settings.name) {
           case MAIN_ROUTE:
             return MaterialPageRoute(builder: (_) => MainPage());
+          case DETAIL_MOVIE_ROUTE:
+            return MaterialPageRoute(builder: (_) => DetailPage());
           default:
             return MaterialPageRoute(builder: (_) {
               return Scaffold(

@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movierse/core/routes/routes.dart';
 import 'package:movierse/core/styles/colors.dart';
 import 'package:movierse/core/styles/texts.dart';
 
@@ -13,7 +14,10 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-
+        Navigator.pushNamed(
+          context,
+          DETAIL_MOVIE_ROUTE
+        );
       },
       child: Stack(
         alignment: Alignment.bottomLeft,

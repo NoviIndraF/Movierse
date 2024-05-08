@@ -12,6 +12,21 @@ class SearchPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                padding: EdgeInsets.only(bottom: 4),
+                child: Row(
+                  children: [
+                    Text(
+                      'Search Your Movie',
+                      style: titleText.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Spacer(),
+                  ],
+                ),
+              ),
               TextField(
                 onChanged: (query) {},
                 decoration: InputDecoration(
