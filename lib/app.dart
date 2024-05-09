@@ -13,6 +13,7 @@ import 'package:movierse/presentation/pages/main_page.dart';
 import 'package:movierse/injection.dart' as di;
 import 'package:movierse/presentation/pages/profile_page.dart';
 import 'package:movierse/presentation/pages/search_page.dart';
+import 'package:movierse/presentation/pages/splash_page.dart';
 
 import 'core/routes/routes.dart';
 import 'core/styles/texts.dart';
@@ -63,7 +64,7 @@ class _AppState extends State<App> {
             textTheme: textTheme,
           ),
           debugShowCheckedModeBanner: false,
-          home: Body(),
+          home: SplashPage(),
           navigatorObservers: [routeObserver],
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
