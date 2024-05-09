@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'app.dart';
+import 'package:movierse/injection.dart' as di;
 
 void main() {
-  runApp(const App());
+  di.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(App());
 }
 
 

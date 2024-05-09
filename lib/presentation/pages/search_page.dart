@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movierse/core/styles/texts.dart';
-import 'package:movierse/presentation/widgets/movie_card.dart';
+import 'package:movierse/presentation/blocs/search/search_bloc.dart';
+import 'package:movierse/presentation/widgets/item_search_movie_card.dart';
 
 class SearchPage extends StatelessWidget {
   @override
@@ -19,16 +21,16 @@ class SearchPage extends StatelessWidget {
                     Text(
                       'Search Your Movie',
                       style: titleText.copyWith(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
-                      ),
+                          fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
                   ],
                 ),
               ),
               TextField(
-                onChanged: (query) {},
+                onChanged: (query) {
+                  context.read<SearchBloc>().add(OnQueryChanged(query));
+                },
                 decoration: InputDecoration(
                   hintText: 'Search title',
                   prefixIcon: Icon(Icons.search),
@@ -40,15 +42,37 @@ class SearchPage extends StatelessWidget {
                 'Search Result',
                 style: titleText,
               ),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemBuilder: (context, index) {
-                    return MovieCard();
-                  },
-                  itemCount: 5,
-                ),
-              )
+              BlocBuilder<SearchBloc, SearchState>(
+                builder: (context, state) {
+                  if (state is SearchLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is SearchHasData) {
+                    final result = state.result;
+                    return Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemBuilder: (context, index) {
+                          final movie = result[index];
+                          return ItemSearchMovieCard(movie);
+                        },
+                        itemCount: result.length,
+                      ),
+                    );
+                  } else if (state is SearchError) {
+                    return Expanded(
+                      child: Center(
+                        child: Text(state.message),
+                      ),
+                    );
+                  } else {
+                    return Expanded(
+                      child: Container(),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),

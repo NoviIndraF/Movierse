@@ -28,7 +28,6 @@ class MovieTable extends Equatable {
         posterPath: map['posterPath'],
         overview: map['overview'],
       );
-
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,

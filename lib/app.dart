@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movierse/core/styles/colors.dart';
+import 'package:movierse/presentation/blocs/detail/detail_movie_bloc.dart';
+import 'package:movierse/presentation/blocs/now_playing/now_playing_movie_bloc.dart';
+import 'package:movierse/presentation/blocs/popular/popular_movie_bloc.dart';
+import 'package:movierse/presentation/blocs/recomendation/recomendation_movie_bloc.dart';
+import 'package:movierse/presentation/blocs/search/search_bloc.dart';
+import 'package:movierse/presentation/blocs/top_rated/top_rated_movie_bloc.dart';
+import 'package:movierse/presentation/blocs/watchlist/watchlist_movie_bloc.dart';
 import 'package:movierse/presentation/pages/detail_page.dart';
-import 'package:movierse/presentation/pages/home_page.dart';
 import 'package:movierse/presentation/pages/main_page.dart';
+import 'package:movierse/injection.dart' as di;
+import 'package:movierse/presentation/pages/search_page.dart';
 
 import 'core/routes/routes.dart';
 import 'core/styles/texts.dart';
@@ -20,36 +29,66 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Movierse',
-      theme: ThemeData.dark().copyWith(
-        colorScheme: colorScheme,
-        primaryColor: primaryColor,
-        scaffoldBackgroundColor: primaryColor,
-        textTheme: textTheme,
-      ),
-      home: body(),
-      navigatorObservers: [routeObserver],
-      onGenerateRoute: (RouteSettings settings) {
-        switch (settings.name) {
-          case MAIN_ROUTE:
-            return MaterialPageRoute(builder: (_) => MainPage());
-          case DETAIL_MOVIE_ROUTE:
-            return MaterialPageRoute(builder: (_) => DetailPage());
-          default:
-            return MaterialPageRoute(builder: (_) {
-              return Scaffold(
-                body: Center(
-                  child: Text('Page not found :('),
-                ),
-              );
-            });
-        }
-      },
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => di.locator<DetailMovieBloc>(),
+          ),
+          BlocProvider(
+            create: (_) => di.locator<NowPlayingMovieBloc>(),
+          ),
+          BlocProvider(
+            create: (_) => di.locator<TopRatedMovieBloc>(),
+          ),
+          BlocProvider(
+            create: (_) => di.locator<PopularMovieBloc>(),
+          ),
+          BlocProvider(
+            create: (_) => di.locator<RecomendationMovieBloc>(),
+          ),
+          BlocProvider(
+            create: (_) => di.locator<SearchBloc>(),
+          ),
+          BlocProvider(
+            create: (_) => di.locator<WatchlistMovieBloc>(),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Movierse',
+          theme: ThemeData.dark().copyWith(
+            colorScheme: colorScheme,
+            primaryColor: primaryColor,
+            scaffoldBackgroundColor: primaryColor,
+            textTheme: textTheme,
+          ),
+          home: Body(),
+          navigatorObservers: [routeObserver],
+          onGenerateRoute: (RouteSettings settings) {
+            switch (settings.name) {
+              case MAIN_ROUTE:
+                return MaterialPageRoute(builder: (_) => MainPage());
+              case DETAIL_MOVIE_ROUTE:
+                final id = settings.arguments as int;
+                return MaterialPageRoute(
+                  builder: (_) => MovieDetailPage(id: id),
+                  settings: settings,
+                );
+              case SEARCH_MOVIE_ROUTE:
+                return MaterialPageRoute(builder: (_) => SearchPage());
+              default:
+                return MaterialPageRoute(builder: (_) {
+                  return Scaffold(
+                    body: Center(
+                      child: Text('Page not found :('),
+                    ),
+                  );
+                });
+            }
+          },
+        ));
   }
 
-  body() {
+  Body() {
     switch (currentIndex) {
       case 0:
         return MainPage();

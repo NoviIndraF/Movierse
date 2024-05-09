@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movierse/core/styles/colors.dart';
 
 final TextStyle titleText =
-    GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w400);
+    GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold);
 final TextStyle subtitleText = GoogleFonts.poppins(
-    fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.15);
+    fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 0.15);
 final TextStyle normalText = GoogleFonts.poppins(
     fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.15);
 final TextStyle bodyText = GoogleFonts.poppins(
