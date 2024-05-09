@@ -96,7 +96,7 @@ class _DetailContentState extends State<DetailContent> {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${widget.movie.posterPath}',
+          imageUrl: '$BASE_IMAGE_URL${widget.movie.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => Center(
             child: CircularProgressIndicator(),
@@ -216,7 +216,7 @@ class _DetailContentState extends State<DetailContent> {
                                         ),
                                         child: CachedNetworkImage(
                                           imageUrl:
-                                              'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                              '$BASE_IMAGE_URL${movie.posterPath}',
                                           placeholder: (context, url) => Center(
                                             child: CircularProgressIndicator(),
                                           ),
@@ -283,12 +283,12 @@ class _DetailContentState extends State<DetailContent> {
 
               if (state is SavedWatchlistMovieState) {
                 final isAdded = state.result;
-                msg = isAdded == false ? ADD_SUCCESS : REMOVE_SUCCESS;
+                msg = isAdded == false ? SAVED_SUCCESS : DELETED_SUCCESS;
               } else {
-                msg = !widget.isAddedWatchlist ? ADD_SUCCESS : REMOVE_SUCCESS;
+                msg = !widget.isAddedWatchlist ? SAVED_SUCCESS : DELETED_SUCCESS;
               }
 
-              if (msg == ADD_SUCCESS || msg == REMOVE_SUCCESS) {
+              if (msg == SAVED_SUCCESS || msg == DELETED_SUCCESS) {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(msg)));
               } else {

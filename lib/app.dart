@@ -11,6 +11,7 @@ import 'package:movierse/presentation/blocs/watchlist/watchlist_movie_bloc.dart'
 import 'package:movierse/presentation/pages/detail_page.dart';
 import 'package:movierse/presentation/pages/main_page.dart';
 import 'package:movierse/injection.dart' as di;
+import 'package:movierse/presentation/pages/profile_page.dart';
 import 'package:movierse/presentation/pages/search_page.dart';
 
 import 'core/routes/routes.dart';
@@ -61,6 +62,7 @@ class _AppState extends State<App> {
             scaffoldBackgroundColor: primaryColor,
             textTheme: textTheme,
           ),
+          debugShowCheckedModeBanner: false,
           home: Body(),
           navigatorObservers: [routeObserver],
           onGenerateRoute: (RouteSettings settings) {
@@ -73,6 +75,8 @@ class _AppState extends State<App> {
                   builder: (_) => MovieDetailPage(id: id),
                   settings: settings,
                 );
+              case PROFILE_ROUTE:
+                return MaterialPageRoute(builder: (_) => ProfilePage());
               case SEARCH_MOVIE_ROUTE:
                 return MaterialPageRoute(builder: (_) => SearchPage());
               default:

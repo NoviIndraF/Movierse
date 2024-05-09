@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movierse/core/constant/constants.dart';
 import 'package:movierse/core/routes/routes.dart';
 import 'package:movierse/core/styles/colors.dart';
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.only(bottom: 4),
+                  padding: EdgeInsets.only(bottom: 4, right: 12, left: 12),
                   child: Row(
                     children: [
                       Text(
@@ -43,7 +43,19 @@ class HomePage extends StatelessWidget {
                         style: titleText.copyWith(),
                       ),
                       Spacer(),
-                      Image.asset('assets/icons/profile.png')
+                      GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(
+                              context,
+                              PROFILE_ROUTE,
+                            );
+                          },
+                          child: CircleAvatar(
+                            backgroundImage:
+                            AssetImage('assets/images/profile.jpeg'),
+                            radius:  24,
+                          ),
+                      )
                     ],
                   ),
                 ),
