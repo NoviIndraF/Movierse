@@ -71,9 +71,7 @@ class _BookmarkPageState extends State<BookmarkPage> with RouteAware {
                   child: Text(state.message),
                 );
               } else {
-                return Expanded(
-                  child: Container(),
-                );
+                return const SizedBox.shrink();
               }
             },
           ),
