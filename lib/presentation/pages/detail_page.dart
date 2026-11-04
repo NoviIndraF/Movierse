@@ -68,9 +68,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           } else if (state is DetailMovieError) {
             return Text(state.message);
           } else {
-            return Expanded(
-              child: Container(),
-            );
+            return const SizedBox.shrink();
           }
         },
       ),
